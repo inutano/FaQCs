@@ -51,7 +51,7 @@
       -substitute
     #end if
 
-    -d $__new_file_path__
+    -d $fastqCount
 
     ## number of process
     -t 2
@@ -151,6 +151,7 @@
        <data name="discard" format="fastq"  label='${tool.name} discarded.fastq' >
             <filter>(condition3['select'] == "yes" and condition1['qctype'] == "2")</filter>
        </data>
+       <data name='fastqCount' fotmat='txt' label='fastqCount' />
   </outputs>
 
 
