@@ -224,7 +224,7 @@ https://github.com/chienchi/FaQCs
 
 -----
 
-This Galaxy tool XML is fixed by Tazro Ohta <t.ohta@dbcls.rois.ac.jp>
+This Galaxy tool XML is fixed for container execution by Tazro Ohta: t.ohta@dbcls.rois.ac.jp
 
   </help>
 </tool>
