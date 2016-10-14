@@ -3,8 +3,8 @@
   <requirements>
     <container type="docker">inutano/faqcs</container>
   </requirements>
-  <command interpereter="sh">
-    FaQCs.sh
+  <command>
+    FaQCs
 
     #if $condition1.qctype=="1"
       -qc_only
