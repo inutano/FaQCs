@@ -3,14 +3,26 @@ set -eu
 
 USER_DIR="/home/galaxy"
 
-if [[ -z `sudo ls /` ]]; then
+if [[ -z `sudo ls / 2>/dev/null` ]]; then
   echo "Permission denied: you have to be granted sudo privileges. Quit"
   exit 1
 fi
 
 echo "==> Installing R.."
-#sudo rpm -ihv http://ftp.riken.jp/Linux/fedora/epel/6/i386/epel-release-6-8.noarch.rpm
-sudo yum -y install R sudo yum perl-ExtUtils-MakeMaker 2>/dev/null
+
+if [[ -e `which yum 2>/dev/null` ]]; then
+  #sudo rpm -ihv http://ftp.riken.jp/Linux/fedora/epel/6/i386/epel-release-6-8.noarch.rpm
+  sudo yum udpate -y && sudo yum install -y R perl-ExtUtils-MakeMaker git
+elif [[ -e `which apt-get` ]]; then
+  sudo apt-get update -y && sudo apt-get install apt-transport-https
+  echo "deb https://cran.ism.ac.jp/bin/linux/ubuntu $(cat /etc/lsb-release | grep DISTRIB_CODENAME | sed -e 's:DISTRIB_CODENAME=::')/" >> /etc/apt/sources.list
+  gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+  gpg -a --export E084DAB9 | sudo apt-key add -
+  sudo apt-get update -y && sudo apt-get install -y r-base libextutils-makemaker-cpanfile-perl git
+else
+  echo "The package manager command (yum/apt-get) not found."
+  exit 1
+fi
 
 echo "==> Installing FaQCs and prerequisites.."
 
