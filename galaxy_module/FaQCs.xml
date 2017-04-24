@@ -39,6 +39,9 @@ FaQCs.pl
 -adapter
 -artifactFile $adapters
 #end if
+#if $condition4_1.select=="yes"
+-adapter
+#end if
 #if $condition5.select=="yes"
 -phiX
 #end if
@@ -96,7 +99,7 @@ FaQCs.pl
     <param name="N_num" type="integer" value="2" label="Trimmed read has more than this number of continuous base 'N' will be discarded." min="0" />   
     <param name="lc" type="float" value="0.85" label="Maximum fraction of mono-/di-nucleotide sequence" min="0.0" max="1.0"/>   
     <conditional name="condition4">
-      <param name="select" type="select" label="Trim Reads with Adapters/Primers">
+      <param name="select" type="select" label="Trim Reads with custom Adapters/Primers">
              <option value="no" selected="true">No</option>
              <option value="yes">Yes</option>
       </param>
@@ -105,6 +108,17 @@ FaQCs.pl
           <param name="adapters" type="data" format="fasta" label="fasta file"/>
       </when>
     </conditional>
+
+    <conditional name="condition4_1">
+      <param name="select" type="select" label="Trim Reads with illumina Adapters/Primers">
+             <option value="no" selected="true">No</option>
+             <option value="yes">Yes</option>
+      </param>
+      <when value="no"/>
+      <when value="yes"/>
+    </conditional>
+    
+    
     <conditional name="condition5">
       <param name="select" type="select" label="Filter phiX reads">
              <option value="no" selected="true">No</option>
